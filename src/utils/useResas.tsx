@@ -1,6 +1,7 @@
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { PopulationSlice } from '@/store/populationSlice';
+import { populationSlice } from '@/store/populationSlice';
 import { populationURL, prefectureURL } from '@/constants';
 
 axios.defaults.headers.common['X-API-KEY'] =
@@ -9,43 +10,57 @@ axios.defaults.headers.common['X-API-KEY'] =
 export default function useResas() {
   const dispatch = useDispatch();
 
-  const loadPrefectures = () => {
-    dispatch(PopulationSlice.actions.setLoading());
+  // 都道府県をロードする関数
+  const loadPrefectures = useCallback(() => {
+    dispatch(populationSlice.actions.setLoading());
     axios
       .get(prefectureURL)
       .then((res) => {
-        const payload = { data: res.data };
-        dispatch(PopulationSlice.actions.loadPrefectures(payload));
+        const payload = res.data.result;
+        dispatch(populationSlice.actions.loadPrefectures(payload));
       })
       .catch((err) => {
-        dispatch(PopulationSlice.actions.showError(err));
+        dispatch(populationSlice.actions.showError(err.message));
       });
-  };
+  }, [dispatch]);
 
-  const loadPopulation = (prefCode: number) => {
-    dispatch(PopulationSlice.actions.setLoading());
-    axios
-      .get(populationURL + prefCode)
-      .then((res) => {
-        const payload = { data: res.data, prefCode };
-        dispatch(PopulationSlice.actions.loadPopulation(payload));
-      })
-      .catch((err) => {
-        dispatch(PopulationSlice.actions.showError(err));
-      });
-  };
+  // 人口をロードする関数
+  const loadPopulation = useCallback(
+    (prefCode: number) => {
+      dispatch(populationSlice.actions.setLoading());
+      axios
+        .get(`${populationURL}${prefCode}`)
+        .then((res) => {
+          const payload = { data: res.data, prefCode };
+          dispatch(populationSlice.actions.loadPopulation(payload));
+        })
+        .catch((err) => {
+          dispatch(populationSlice.actions.showError(err.message));
+        });
+    },
+    [dispatch],
+  );
 
-  const removePopulation = (prefCode: number) => {
-    dispatch(PopulationSlice.actions.removePopulation(prefCode));
-  };
+  // 人口情報を削除する関数
+  const removePopulation = useCallback(
+    (prefCode: number) => {
+      dispatch(populationSlice.actions.removePopulation(prefCode));
+    },
+    [dispatch],
+  );
 
-  const setGeneration = (generation: string) => {
-    dispatch(PopulationSlice.actions.setGeneration(generation));
-  };
+  // 世代を設定する関数
+  const setGeneration = useCallback(
+    (generation: string) => {
+      dispatch(populationSlice.actions.setGeneration(generation));
+    },
+    [dispatch],
+  );
 
   return {
     loadPrefectures,
     loadPopulation,
     removePopulation,
+    setGeneration,
   };
 }
