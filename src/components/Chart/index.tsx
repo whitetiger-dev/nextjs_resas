@@ -61,6 +61,25 @@ export default function Chart() {
         enabled: false,
       },
       series: chartData,
+
+      // レスポンシブ設定
+      responsive: {
+        rules: [
+          {
+            // このルールでは、ビューポートが768px以下の場合に適用されます。
+            condition: {
+              maxWidth: 768,
+            },
+            chartOptions: {
+              legend: {
+                layout: 'horizontal',
+                align: 'center',
+                verticalAlign: 'bottom',
+              },
+            },
+          },
+        ],
+      },
     };
 
     return options;

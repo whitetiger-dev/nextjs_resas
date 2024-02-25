@@ -35,6 +35,8 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <title>人口統計資料</title>
+
       <div className={styles.header}>
         <h1>人口統計資料</h1>
       </div>

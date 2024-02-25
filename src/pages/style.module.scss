@@ -1,14 +1,29 @@
+@import '@/styles/_mixin.scss';
+
 .main {
   padding: 2rem;
+
+  @include responsive {
+    padding: 1rem;
+  }
 }
 
 .header {
   font-size: xx-large;
+
+  @include responsive {
+    font-size: large;
+  }
 }
 
 .sectionTitle {
   font-size: x-large;
   padding-left: 1rem;
+
+  @include responsive {
+    font-size: medium;
+    padding-left: 0.5rem;
+  }
 }
 
 .prefectureContainer {
@@ -17,6 +32,12 @@
   flex-wrap: wrap;
   padding: 0 2rem;
   gap: 1rem;
+
+  @include responsive {
+    font-size: medium;
+    padding: 0 1rem;
+    justify-content: center;
+  }
 }
 
 .generationContainer {
@@ -24,4 +45,8 @@
   padding: 2rem;
   font-size: large;
   font-weight: bold;
+
+  @include responsive {
+    text-align: center;
+  }
 }
