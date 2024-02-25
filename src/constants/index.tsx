@@ -1,3 +1,5 @@
+import { DashStyleValue } from 'highcharts';
+
 export const prefectureURL =
   'https://opendata.resas-portal.go.jp/api/v1/prefectures';
 
@@ -9,4 +11,13 @@ export const generationList = [
   '年少人口',
   '生産年齢人口',
   '老年人口',
+];
+
+export const dashStyles: Array<DashStyleValue> = [
+  'Solid',
+  'ShortDash',
+  'Dot',
+  'Dash',
+  'LongDash',
+  'ShortDot',
 ];

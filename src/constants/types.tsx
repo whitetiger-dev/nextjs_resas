@@ -15,9 +15,9 @@ export interface PopulationInfo {
   prefCode: number;
   data: Array<{
     label: string;
-    data: {
+    data: Array<{
       year: number;
       value: number;
-    };
+    }>;
   }>;
 }

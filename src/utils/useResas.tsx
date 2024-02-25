@@ -20,7 +20,7 @@ export default function useResas() {
         dispatch(populationSlice.actions.loadPrefectures(payload));
       })
       .catch((err) => {
-        dispatch(populationSlice.actions.showError(err.message));
+        dispatch(populationSlice.actions.showError(err));
       });
   }, [dispatch]);
 
@@ -31,11 +31,11 @@ export default function useResas() {
       axios
         .get(`${populationURL}${prefCode}`)
         .then((res) => {
-          const payload = { data: res.data, prefCode };
+          const payload = { data: res.data.result.data, prefCode };
           dispatch(populationSlice.actions.loadPopulation(payload));
         })
         .catch((err) => {
-          dispatch(populationSlice.actions.showError(err.message));
+          dispatch(populationSlice.actions.showError(err));
         });
     },
     [dispatch],

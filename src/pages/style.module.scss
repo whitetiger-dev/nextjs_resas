@@ -1,7 +1,27 @@
-.container {
+.main {
+  padding: 2rem;
+}
+
+.header {
+  font-size: xx-large;
+}
+
+.sectionTitle {
+  font-size: x-large;
+  padding-left: 1rem;
+}
+
+.prefectureContainer {
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  padding: 3rem;
+  padding: 0 2rem;
   gap: 1rem;
+}
+
+.generationContainer {
+  margin-top: 2rem;
+  padding: 2rem;
+  font-size: large;
+  font-weight: bold;
 }

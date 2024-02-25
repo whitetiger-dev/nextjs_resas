@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux';
 import useResas from '@/utils/useResas';
 import { selectPopulation } from '@/store';
 import CheckBox from '@/components/PrefectureBox';
+import Spinner from '@/components/Spinner';
 import styles from './style.module.scss';
+import Select from '@/components/GenerationSelect';
+import Chart from '@/components/Chart';
 
 export default function Home() {
   const { loadPrefectures, loadPopulation, removePopulation } = useResas();
@@ -31,21 +34,34 @@ export default function Home() {
   };
 
   return (
-    <main>
-      <div>
+    <main className={styles.main}>
+      <div className={styles.header}>
         <h1>人口統計資料</h1>
       </div>
 
-      <div className={styles.container}>
-        {prefectures.map((item) => (
-          <CheckBox
-            name={item.prefName}
-            prefCode={item.prefCode}
-            onChange={handleCheck}
-            key={item.prefName}
-          />
-        ))}
+      <div>
+        <h2 className={styles.sectionTitle}>都道府県</h2>
+        <div className={styles.prefectureContainer}>
+          {prefectures.map((item) => (
+            <CheckBox
+              name={item.prefName}
+              prefCode={item.prefCode}
+              onChange={handleCheck}
+              key={item.prefName}
+            />
+          ))}
+        </div>
       </div>
+
+      <div className={styles.generationContainer}>
+        年齢: <Select />
+      </div>
+
+      <div>
+        <Chart />
+      </div>
+
+      {isLoading && <Spinner />}
     </main>
   );
 }
