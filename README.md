@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Resas Webアプリ Next.js(Typescript) デモ
 
-## Getting Started
+- フロントエンド: Nextjs 14.1.0（Highcharts / Redux-toolkit /Resas API）
+- 環境: Node.js 20.11.0
+- テスト: ユニットテスト (Jest)
+- リント: PrettierとEslintを利用
+- デプロイ: AWS Amplify
 
-First, run the development server:
+## ライブデモ
+
+https://master.djhggwcd9oi6z.amplifyapp.com
+
+## ❯ はじめに
+
+### ステップ1: Resas APIキーの取得
+
+次のURLからResas APIキーを取得してください。
+[Resas](https://opendata.resas-portal.go.jp/)にアクセスし、アカウントを登録してAPIキーを取得します。
+環境変数は次のように設定します：
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+.env
+REACT_APP_API_KEY=YOUR_API_KEY_HERE
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### ステップ2: 開発環境のセットアップ
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+何かを行う前に開発環境をセットアップする必要があります。
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[Node.jsとNPM](https://nodejs.org/ja/download/)をインストールします。
 
-## Learn More
+それから、あなたのアプリケーション環境を設定します。
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> これにより、すべての依存関係がNPMでインストールされます。そのため、これにより開発環境は使用準備が整います。
 
-## Deploy on Vercel
+### ステップ3: ユニットテスト
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `npm run test` を実行してユニットテストを行います。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### ステップ4: ビルド
+
+- `npm run build` を実行してプロジェクトをビルドします。
+
+## 主要な機能
+
+- SCSSと用いたレスポンシブデザインの実装
+- Reactの標準的なアーキテクチャの実装
+- データキャッシュやデータ取得時のローディングバーの追加にreduxを使用
+- 都道府県のチェックボックスのダブルクリックエラーの防止
+- mockstoreとJestを用いた各コンポーネントのユニットテストの実装
+- スマートなコードスタイルのためのEslintとPrettierの統合
